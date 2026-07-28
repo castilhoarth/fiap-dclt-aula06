@@ -14,6 +14,8 @@ Globals:
     Timeout: 30
     MemorySize: 128
     Runtime: python3.9
+    Policies:
+      - AWSLambdaBasicExecutionRole
     Environment:
       Variables:
         ENVIRONMENT: !Ref Environment
@@ -36,7 +38,6 @@ Resources:
       FunctionName: !Sub "fiap-hello-${Environment}"
       CodeUri: src/
       Handler: handlers.hello
-      Role: !Sub "arn:aws:iam::${AWS::AccountId}:role/LabRole"
       Events:
         Hello:
           Type: Api
@@ -52,7 +53,6 @@ Resources:
       FunctionName: !Sub "fiap-health-${Environment}"
       CodeUri: src/
       Handler: handlers.health
-      Role: !Sub "arn:aws:iam::${AWS::AccountId}:role/LabRole"
       Events:
         Health:
           Type: Api
@@ -68,7 +68,6 @@ Resources:
       FunctionName: !Sub "fiap-info-${Environment}"
       CodeUri: src/
       Handler: handlers.info
-      Role: !Sub "arn:aws:iam::${AWS::AccountId}:role/LabRole"
       Events:
         Info:
           Type: Api
